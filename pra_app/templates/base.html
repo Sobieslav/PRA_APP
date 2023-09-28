@@ -1,0 +1,48 @@
+{% load static %}Movies
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>PRA app</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <a href="{% url 'main' %}">
+            <img src="{% static 'images/pra-logo.png' %}" alt="App Name">
+        </a>
+        <form method="get" action="{% url 'search_results' %}">
+            {% csrf_token %}
+            <input type="text" name="query" placeholder="Search...">
+            <button type="submit">Search</button>
+        </form>
+    </header>
+
+    <section>
+        <a href="{% url 'game_add' %}" class="button">Add game</a>
+        <a href="{% url 'movie_add' %}" class="button">Add movie</a>
+        <a href="{% url 'genre_add' %}" class="button">Add genre</a>
+
+
+        {% if user.is_authenticated %}
+        <p>Logged as {{ user.username }}</p>
+        <a href="{% url 'logout' %}?next={{ request.path }}" class="button">Logout</a>
+        {% else %}
+        <a href="{% url 'login' %}?next={{ request.path }}" class="button">Login</a>
+        {% endif %}
+
+
+    </section>
+
+    <p></p>
+    <p></p>
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+    <p></p>
+
+    <footer class="footer">
+        &copy; 2023 PRA app
+    </footer>
+</body>
+</html>

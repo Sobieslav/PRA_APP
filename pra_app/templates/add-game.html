@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Add a New Game</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/game-add.css' %}">
+</head>
+<body>
+<h1>Add a New Game</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Game</button>
+</form>
+<a href="{% url 'game_list' %}" class="button">Back to Game List</a>
+</body>
+</html>
+
+{% endblock %}

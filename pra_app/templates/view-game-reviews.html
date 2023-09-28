@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Reviews for {{ game.title }}</title>
+    <!-- Link to the external CSS file for reviews styling -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reviews-style.css' %}">
+</head>
+<body>
+<h1>Reviews for {{ game.title }}</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Reviewer</th>
+            <th>Rating</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for review in reviews %}
+        <tr>
+            <td>{{ review.user.username }}</td>
+            <td>{{ review.rating }}</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <p><strong>Review:</strong> {{ review.description }}</p>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="2">No reviews available for this game.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Link to go back to the game details -->
+<p><a href="{% url 'game_details' game.id %}" class="button">Back to Game Description</a></p>
+</body>
+</html>
+{% endblock %}

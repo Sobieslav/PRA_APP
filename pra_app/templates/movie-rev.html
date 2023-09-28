@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Write a Review</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/review-form.css' %}">
+</head>
+<body>
+    <div class="centered-form">
+        <h1>Write a Review for {{ movie.title }}</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit Review</button>
+        </form>
+
+        <p><a href="{% url 'movie_details' movie.id %}" class="button">Back to Movie Description</a></p>
+    </div>
+</body>
+</html>
+
+{% csrf_token %}
+{% endblock %}

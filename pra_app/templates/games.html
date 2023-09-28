@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Game List</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/center-content.css' %}">
+</head>
+<body>
+<div class="center-content">
+    <h1>List of Games on the app</h1>
+    <div>
+        {% for game in games %}
+        <p><a href="{% url 'game_details' game.id %}" class="back-link">
+            <button type="button" class="game-button">{{ game.title }}</button>
+        </a></p>
+        {% endfor %}
+    </div>
+<br>
+    <div class="pagination">
+        <span class="step-links">
+            {% if games.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ games.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current-page">
+                Page {{ games.number }} of {{ games.paginator.num_pages }}.
+            </span>
+
+            {% if games.has_next %}
+                <a href="?page={{ games.next_page_number }}">next</a>
+                <a href="?page={{ games.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+
+</body>
+</html>
+
+{% endblock %}

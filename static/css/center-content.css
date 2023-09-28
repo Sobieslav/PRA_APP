@@ -1,0 +1,80 @@
+/* Center the content vertically and horizontally */
+.center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    text-align: center;
+}
+
+/* Style for game buttons */
+.game-button {
+    display: inline-block;
+    width: 200px;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.game-button:hover {
+    background-color: #0056b3;
+}
+
+/* Adjust the margin-top for the content to create space for the footer */
+#content {
+    /* Remove margin-top: auto; */
+    flex-grow: 1; /* Allow content to grow and push footer to the bottom */
+}
+
+/* Style for the footer */
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    position: sticky;
+    bottom: 0;
+}
+
+.movie-button {
+    display: inline-block;
+    width: 200px;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.movie-button:hover {
+    background-color: #0056b3;
+}
+
+.result-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 4px;
+}
+
+.result-button:hover {
+    background-color: #0056b3;
+}

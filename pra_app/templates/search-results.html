@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Game List</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/center-content.css' %}">
+</head>
+
+<h1>Search Results</h1>
+<form method="get">
+    {{ form }}
+    <button type="submit">Search</button>
+</form>
+<h2>Games</h2>
+<ul>
+    {% for game in games %}
+    <li>
+        <form method="get" action="{% url 'game_details' game.id %}">
+            <button type="submit" class="result-button">{{ game.title }}</button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+<h2>Movies</h2>
+<ul>
+    {% for movie in movies %}
+    <li>
+        <form method="get" action="{% url 'movie_details' movie.id %}">
+            <button type="submit" class="result-button">{{ movie.title }}</button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+</html>
+{% endblock %}

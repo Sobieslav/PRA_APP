@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ movie.title }}</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/movie-details.css' %}">
+</head>
+<body>
+<h1>{{ movie.title }}</h1>
+<p><strong>Release Date:</strong> {{ movie.release_date }}</p>
+<p><strong>Description:</strong> {{ movie.description }}</p>
+<p><strong>Genres:</strong>
+    {% for genre in genres %}
+        {{ genre.name }}
+        {% if not forloop.last %},{% endif %}
+    {% endfor %}
+</p>
+
+<p><a href="{% url 'movie_edit' movie.id %}" class="button">Edit</a></p>
+<p><a href="{% url 'movie_rev' movie.id %}" class="button">Add a Movie Review</a></p>
+<p><a href="{% url 'view_movie_reviews' movie.id %}" class="button">View Movie Reviews</a></p>
+<p><a href="{% url 'movie_list' %}" class="button">Back to Movie List</a></p>
+</body>
+</html>
+
+{% csrf_token %}
+{% endblock %}

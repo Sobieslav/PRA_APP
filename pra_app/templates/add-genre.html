@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<h1>Add a Genre</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Genre</button>
+</form>
+<a href="{% url 'genre_add' %}" class="button">Add Another Genre</a>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li
+    {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% endblock %}

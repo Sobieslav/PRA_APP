@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ game.title }}</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/game-details.css' %}">
+</head>
+<body>
+<h1>{{ game.title }}</h1>
+<p><strong>Release Date:</strong> {{ game.release_date }}</p>
+<p><strong>Description:</strong> {{ game.description }}</p>
+<p><strong>Genres:</strong>
+    {% for genre in genres %}
+    {{ genre.name }}
+    {% if not forloop.last %},{% endif %}
+    {% endfor %}
+</p>
+<p><strong>Average Score:</strong> {{ average_score }}</p>
+
+
+<p><a href="{% url 'game_edit' game.id %}" class="button">Edit</a></p>
+<p><a href="{% url 'game_rev' game.id %}" class="button">Add a Review</a></p>
+<p><a href="{% url 'view_game_reviews' game.id %}" class="button">View Reviews</a></p>
+<p><a href="{% url 'game_list' %}" class="button">Back to Game List</a></p>
+</body>
+</html>
+
+{% csrf_token %}
+{% endblock %}
