@@ -135,8 +135,7 @@ class AddGameReviewView(View):
             review.game = game
             review.user = request.user
             review.save()
-            # Redirect to a success page or back to the game details page
-            return redirect('game_details', game_id=game_id)  # Adjust the URL name as needed
+            return redirect('game_details', game_id=game_id)
         return render(request, self.template_name, {'game': game, 'form': form})
 
 
