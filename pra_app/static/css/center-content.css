@@ -1,4 +1,3 @@
-/* Center the content vertically and horizontally */
 .center-content {
     display: flex;
     flex-direction: column;
@@ -8,7 +7,6 @@
     text-align: center;
 }
 
-/* Style for game buttons */
 .game-button {
     display: inline-block;
     width: 200px;
@@ -27,21 +25,6 @@
     background-color: #0056b3;
 }
 
-/* Adjust the margin-top for the content to create space for the footer */
-#content {
-    /* Remove margin-top: auto; */
-    flex-grow: 1; /* Allow content to grow and push footer to the bottom */
-}
-
-/* Style for the footer */
-.footer {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-    position: sticky;
-    bottom: 0;
-}
 
 .movie-button {
     display: inline-block;

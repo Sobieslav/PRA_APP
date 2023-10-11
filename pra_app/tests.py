@@ -1,7 +1,37 @@
+import pytest
 from django.test import TestCase
 from decimal import Decimal
 from django.contrib.auth.models import User
 from pra_app.models import Game, Movie, Genre, Review
+from django.core.exceptions import ValidationError
+
+
+@pytest.mark.django_db
+def test_login_user(client):
+    """
+    Login view test, created user should be able to login
+    """
+    user = User.objects.create_user(username='testuser', password='testpassword')
+    user.save()
+
+    response = client.get('/login/')
+    assert response.status_code == 200
+    response = client.post('/login/', {'username': 'testuser', 'password': 'testpassword'})
+    assert response.status_code == 302
+
+
+@pytest.mark.django_db
+def test_failed_login_user(client):
+    """
+    Test for login view. Incorrect data provided
+    """
+    user = User.objects.create_user(username='testuser', password='testpassword')
+    user.save()
+
+    response = client.get('/login/')
+    assert response.status_code == 200
+    response = client.post('/login/', {'username': 'tesssstuser111', 'password': 'testpassssssssword1111'})
+    assert response.status_code == 200  # Return to login page but on the screen the error message is shown
 
 
 class TestForUrlCases(TestCase):
@@ -119,7 +149,7 @@ class TestForUrlCases(TestCase):
         assert response.status_code == 404
 
 
-class TestsForViews(TestCase):
+class TestsForReviews(TestCase):
 
     def setUp(self):
         """
@@ -157,3 +187,17 @@ class TestsForViews(TestCase):
 
         assert review.rating == expected_rating
         assert review.description == expected_description
+
+    def test_review_no_game_or_movie(self):
+        """
+        Test function that checks if it is possible to create review where no movie or game is selected or existing.
+        """
+        review = Review(user=self.user, rating=Decimal('8.5'), description='Review without game or movie')
+
+        try:
+            review.save()
+        except ValidationError as e:
+            self.assertEqual(
+                e.message_dict,
+                {'__all__': ['A review must be associated with either a game or a movie that exists on the database.']}
+            )

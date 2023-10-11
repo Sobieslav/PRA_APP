@@ -1,12 +1,24 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-
-    <section>
-        <p>Welcome to PRA, your own mini private rating app. It is a place where you can rate your favorite games and movies.</p>
-        <a href="{% url 'game_list' %}"><img src="{% static 'images/game-controller.png' %}" alt="Games"></a>
-        <a href="{% url 'movie_list' %}"><img src="{% static 'images/film-roll.png' %}" alt="Movies"></a>
-    </section>
-
-{% csrf_token %}
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>PRA app</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    </head>
+    <body>
+        <div id="content">
+            <p>Welcome to PRA, your own mini private rating app. It is a place where you can rate your favorite games and movies.</p>
+            <div class="image-row">
+                <a href="{% url 'game_list' %}">
+                    <img src="{% static 'images/game-controller.png' %}" alt="Games">
+                </a>
+                <a href="{% url 'movie_list' %}">
+                    <img src="{% static 'images/film-roll.png' %}" alt="Movies">
+                </a>
+            </div>
+        </div>
+    </body>
+    </html>
 {% endblock %}
